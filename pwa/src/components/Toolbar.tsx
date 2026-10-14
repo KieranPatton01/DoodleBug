@@ -1,0 +1,181 @@
+import React from 'react';
+import { 
+  Paintbrush, 
+  Eraser, 
+  Highlighter, 
+  Type, 
+  Image as ImageIcon, 
+  RotateCcw, 
+  RotateCw, 
+  Trash2 
+} from 'lucide-react';
+import { ToolType } from '../types';
+
+interface ToolbarProps {
+  currentTool: ToolType;
+  onSelectTool: (tool: ToolType) => void;
+  brushColor: string;
+  brushSize: number;
+  onOpenColorPicker: () => void;
+  onOpenBrushPicker: () => void;
+  onOpenTextModal: () => void;
+  onOpenStickerTray: () => void;
+  canUndo: boolean;
+  canRedo: boolean;
+  onUndo: () => void;
+  onRedo: () => void;
+  onClear: () => void;
+}
+
+export const Toolbar: React.FC<ToolbarProps> = ({
+  currentTool,
+  onSelectTool,
+  brushColor,
+  brushSize,
+  onOpenColorPicker,
+  onOpenBrushPicker,
+  onOpenTextModal,
+  onOpenStickerTray,
+  canUndo,
+  canRedo,
+  onUndo,
+  onRedo,
+  onClear,
+}) => {
+  return (
+    <nav className="fixed bottom-0 left-0 right-0 z-30 p-2 sm:p-3 pointer-events-none flex justify-center">
+      <div className="pointer-events-auto bg-white/95 backdrop-blur-md border border-stone-300 shadow-retro rounded-3xl p-1.5 sm:p-2 flex items-center gap-1 sm:gap-2 max-w-full overflow-x-auto scrollbar-none">
+        
+        {/* Brush Tool */}
+        <button
+          onClick={() => {
+            if (currentTool === 'brush') {
+              onOpenBrushPicker();
+            } else {
+              onSelectTool('brush');
+            }
+          }}
+          className={`relative p-2.5 sm:p-3 rounded-2xl flex flex-col items-center justify-center transition-all transform active:scale-90 ${
+            currentTool === 'brush'
+              ? 'bg-slate-900 text-white shadow-xs'
+              : 'text-slate-600 hover:bg-stone-100'
+          }`}
+          title={`Paintbrush (${brushSize}px - tap again to change size)`}
+        >
+          <Paintbrush className="w-5 h-5" />
+          <span className="text-[10px] font-semibold mt-0.5">Pen</span>
+        </button>
+
+        {/* Marker Tool */}
+        <button
+          onClick={() => onSelectTool('marker')}
+          className={`p-2.5 sm:p-3 rounded-2xl flex flex-col items-center justify-center transition-all transform active:scale-90 ${
+            currentTool === 'marker'
+              ? 'bg-slate-900 text-white shadow-xs'
+              : 'text-slate-600 hover:bg-stone-100'
+          }`}
+          title="Highlighter / Marker"
+        >
+          <Highlighter className="w-5 h-5" />
+          <span className="text-[10px] font-semibold mt-0.5">Mark</span>
+        </button>
+
+        {/* Eraser Tool */}
+        <button
+          onClick={() => onSelectTool('eraser')}
+          className={`p-2.5 sm:p-3 rounded-2xl flex flex-col items-center justify-center transition-all transform active:scale-90 ${
+            currentTool === 'eraser'
+              ? 'bg-slate-900 text-white shadow-xs'
+              : 'text-slate-600 hover:bg-stone-100'
+          }`}
+          title="Eraser"
+        >
+          <Eraser className="w-5 h-5" />
+          <span className="text-[10px] font-semibold mt-0.5">Erase</span>
+        </button>
+
+        {/* Color Indicator / Picker */}
+        <button
+          onClick={onOpenColorPicker}
+          className="p-2 sm:p-2.5 rounded-2xl flex flex-col items-center justify-center hover:bg-stone-100 transition-all transform active:scale-90"
+          title="Color Palette"
+        >
+          <div
+            className="w-6 h-6 rounded-full border-2 border-slate-900 shadow-xs"
+            style={{ backgroundColor: brushColor }}
+          />
+          <span className="text-[10px] font-semibold mt-0.5 text-slate-700">Color</span>
+        </button>
+
+        <div className="w-[1px] h-8 bg-stone-200 mx-0.5" />
+
+        {/* Add Text Note */}
+        <button
+          onClick={onOpenTextModal}
+          className="p-2.5 sm:p-3 rounded-2xl text-slate-700 hover:bg-stone-100 flex flex-col items-center justify-center transition-all transform active:scale-90"
+          title="Add Handwritten Text Note"
+        >
+          <Type className="w-5 h-5 text-amber-700" />
+          <span className="text-[10px] font-semibold mt-0.5">Note</span>
+        </button>
+
+        {/* Image / Sticker Tray */}
+        <button
+          onClick={onOpenStickerTray}
+          className="p-2.5 sm:p-3 rounded-2xl text-slate-700 hover:bg-stone-100 flex flex-col items-center justify-center transition-all transform active:scale-90"
+          title="Upload / Drop Photos to Firebase"
+        >
+          <ImageIcon className="w-5 h-5 text-pink-600" />
+          <span className="text-[10px] font-semibold mt-0.5">Photo</span>
+        </button>
+
+        <div className="w-[1px] h-8 bg-stone-200 mx-0.5" />
+
+        {/* Undo Button */}
+        <button
+          onClick={onUndo}
+          disabled={!canUndo}
+          className={`p-2.5 sm:p-3 rounded-2xl flex flex-col items-center justify-center transition-all ${
+            canUndo
+              ? 'text-slate-700 hover:bg-stone-100 active:scale-90'
+              : 'text-stone-300 cursor-not-allowed'
+          }`}
+          title="Undo"
+        >
+          <RotateCcw className="w-4 h-4" />
+          <span className="text-[10px] font-medium mt-0.5">Undo</span>
+        </button>
+
+        {/* Redo Button */}
+        <button
+          onClick={onRedo}
+          disabled={!canRedo}
+          className={`p-2.5 sm:p-3 rounded-2xl flex flex-col items-center justify-center transition-all ${
+            canRedo
+              ? 'text-slate-700 hover:bg-stone-100 active:scale-90'
+              : 'text-stone-300 cursor-not-allowed'
+          }`}
+          title="Redo"
+        >
+          <RotateCw className="w-4 h-4" />
+          <span className="text-[10px] font-medium mt-0.5">Redo</span>
+        </button>
+
+        {/* Clear Canvas */}
+        <button
+          onClick={() => {
+            if (window.confirm('Clear your entire doodle canvas?')) {
+              onClear();
+            }
+          }}
+          className="p-2.5 sm:p-3 rounded-2xl text-rose-600 hover:bg-rose-50 flex flex-col items-center justify-center transition-all active:scale-90"
+          title="Clear Canvas"
+        >
+          <Trash2 className="w-4 h-4" />
+          <span className="text-[10px] font-medium mt-0.5">Clear</span>
+        </button>
+
+      </div>
+    </nav>
+  );
+};

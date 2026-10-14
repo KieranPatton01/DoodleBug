@@ -1,0 +1,9 @@
+# Cloudflare Worker Local Development Variables & Secrets (.dev.vars)
+# Used by `wrangler dev` locally. In production, use `wrangler secret put <KEY>`.
+
+GEMINI_API_KEY=AIzaSy...
+GITHUB_PAT=github_pat_...
+ALLOWED_FIREBASE_UID=your-authorized-firebase-uid
+FIREBASE_PROJECT_ID=your-firebase-project-id
+CORS_ORIGIN=http://localhost:3000
+DEV_BYPASS_AUTH=false

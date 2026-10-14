@@ -1,0 +1,49 @@
+name: Doodlebug CI & Security Audit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  audit-and-test:
+    name: Build, Unit Tests & Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: |
+            worker/package-lock.json
+            pwa/package-lock.json
+
+      - name: Install Worker dependencies & Run Tests
+        working-directory: ./worker
+        run: |
+          npm ci
+          npm run typecheck
+          npm run lint
+          npm test
+
+      - name: Install PWA dependencies, Run Tests & Build Production Bundle
+        working-directory: ./pwa
+        run: |
+          npm ci
+          npm run lint
+          npm test
+          npm run build
+
+      - name: Run Code Quality & Linting Audit
+        run: |
+          node scripts/lint.js
+
+      - name: Run Complete End-to-End Audit & Verification Suite
+        run: |
+          node scripts/test-all.js

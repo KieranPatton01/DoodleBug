@@ -1,0 +1,22 @@
+name = "doodlebug-gateway"
+main = "src/index.ts"
+compatibility_date = "2024-04-01"
+
+# Cloudflare Worker environment variables & configuration
+# NOTE: SENSITIVE SECRETS MUST BE SET VIA WRANGLER SECRET:
+#   wrangler secret put GEMINI_API_KEY
+#   wrangler secret put GITHUB_PAT
+#   wrangler secret put ALLOWED_FIREBASE_UID
+#   wrangler secret put FIREBASE_PROJECT_ID
+
+[vars]
+# Default non-secret configurations
+GITHUB_OWNER = "kieranpatton01"
+GITHUB_REPO = "DoodleBug"
+GITHUB_BRANCH = "main"
+GITHUB_COMMITTER_NAME = "Kieran Patton"
+GITHUB_COMMITTER_EMAIL = "kieranpatton01@users.noreply.github.com"
+# Restrict CORS to your PWA domain in production (e.g. "https://doodlebug.web.app" or "https://yourdomain.com").
+CORS_ORIGIN = "http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,https://your-pwa-domain.web.app"
+ENVIRONMENT = "production"
+GEMINI_MODEL = "gemini-3.8-flash"

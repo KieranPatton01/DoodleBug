@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Doodlebug 🐛🎨 | Mobile CMS</title>
+    <meta name="description" content="Draw on retro canvas, drop photos, and vibecode to your live website with Gemini Flash." />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#FFFDF5" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Doodlebug" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-butter text-slate-800 antialiased overflow-hidden select-none">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Register service worker for offline PWA installation (skip in Vite dev to prevent stale HMR caching)
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+          if (!isDev) {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+          } else {
+            // Unregister any active worker in dev so hot reloads and live updates are never cached
+            navigator.serviceWorker.getRegistrations().then((regs) => {
+              regs.forEach((reg) => reg.unregister());
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
