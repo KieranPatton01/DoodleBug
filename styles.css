@@ -1,0 +1,52 @@
+/* Doodlebug Live Site Outer Shell Styles */
+
+:root {
+  --butter: #FFFDF5;
+  --stone-line: #E7E5E4;
+}
+
+body {
+  background-color: var(--butter);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Subtle dot grid pattern on background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(#d6d3d1 0.75px, transparent 0.75px);
+  background-size: 20px 20px;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Smooth transitions for iframe sizing */
+#doodle-stage {
+  width: 100%;
+  min-height: 380px;
+  transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #fbf9f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
