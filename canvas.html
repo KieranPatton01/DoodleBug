@@ -3,123 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TOP 3 Bugs OAT</title>
+  <title>Canvas</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #faf8f5;
-      background-image: radial-gradient(#d1cfc7 1.5px, transparent 1.5px);
+    .dot-grid {
+      background-color: #faf9f5;
+      background-image: radial-gradient(#dedbd2 1.2px, transparent 1.2px);
       background-size: 24px 24px;
-    }
-    .font-handwritten {
-      font-family: 'Caveat', cursive;
-    }
-    .font-sans-bold {
-      font-family: 'Plus Jakarta Sans', sans-serif;
     }
   </style>
 </head>
-<body class="m-0 p-0 w-full min-h-screen text-slate-800 antialiased flex flex-col items-center">
-  <div class="w-full max-w-[430px] min-h-screen px-4 py-8 flex flex-col justify-start relative">
-    
-    <!-- Title Card -->
-    <div class="w-full flex justify-center mb-8">
-      <div class="bg-[#fef9c3] border border-[#fef08a] rounded-2xl px-6 py-2 shadow-sm text-center">
-        <h1 class="font-handwritten text-[#e11d48] text-3xl sm:text-4xl italic font-bold tracking-wide">
-          TOP 3 Bugs OAT
-        </h1>
+<body class="m-0 p-0 w-full min-h-screen dot-grid flex flex-col items-center justify-center">
+  <div class="flex flex-col items-center justify-center w-full px-4" style="margin-top: -15vh;">
+    <!-- Polaroid Frame Container -->
+    <div class="bg-white p-2.5 pb-6 shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-neutral-100 flex flex-col items-center max-w-[260px] w-full">
+      <div class="w-full aspect-square overflow-hidden bg-neutral-100">
+        <img 
+          src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" 
+          alt="Cat GIF" 
+          class="w-full h-full object-cover block select-none pointer-events-none"
+        />
       </div>
     </div>
-
-    <!-- Items List -->
-    <div class="flex flex-col gap-6 w-full">
-
-      <!-- Item 1: Tricky Bug -->
-      <div class="flex items-center gap-4">
-        <!-- Polaroid Frame -->
-        <div class="bg-white p-2 pb-5 rounded-sm shadow-md border border-neutral-200/80 w-[140px] flex-shrink-0">
-          <div class="w-full aspect-square bg-neutral-100 overflow-hidden">
-            <img 
-              src="https://islacowper.co.uk/img/photo_1794159194144_g08b43.png" 
-              alt="Tricky Bug" 
-              class="w-full h-full object-cover select-none pointer-events-none"
-            >
-          </div>
-        </div>
-        <!-- Label Pill -->
-        <div class="flex-grow">
-          <div class="bg-[#fef9c3] border border-[#fef08a] rounded-2xl py-3 px-4 shadow-sm text-center">
-            <span class="font-sans-bold text-[#1e293b] text-lg sm:text-xl font-bold whitespace-nowrap">
-              1. Tricky Bug
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Item 2: Confused Bug -->
-      <div class="flex items-center gap-4">
-        <!-- Polaroid Frame -->
-        <div class="bg-white p-2 pb-5 rounded-sm shadow-md border border-neutral-200/80 w-[140px] flex-shrink-0">
-          <div class="w-full aspect-square bg-neutral-100 overflow-hidden">
-            <img 
-              src="https://islacowper.co.uk/img/photo_1794159306191_hx0g9u.jpg" 
-              alt="Confused Bug" 
-              class="w-full h-full object-cover select-none pointer-events-none"
-            >
-          </div>
-        </div>
-        <!-- Label Pill -->
-        <div class="flex-grow">
-          <div class="bg-[#fef9c3] border border-[#fef08a] rounded-2xl py-3 px-4 shadow-sm text-center">
-            <span class="font-sans-bold text-[#1e293b] text-lg sm:text-xl font-bold whitespace-nowrap">
-              2. Confused Bug
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Item 3: Moopy Bug -->
-      <div class="flex items-center gap-4">
-        <!-- Polaroid Frame -->
-        <div class="bg-white p-2 pb-5 rounded-sm shadow-md border border-neutral-200/80 w-[140px] flex-shrink-0">
-          <div class="w-full aspect-square bg-neutral-100 overflow-hidden">
-            <img 
-              src="https://islacowper.co.uk/img/photo_1794159349391_iu7i4x.png" 
-              alt="Moopy Bug" 
-              class="w-full h-full object-cover select-none pointer-events-none"
-            >
-          </div>
-        </div>
-        <!-- Label Pill -->
-        <div class="flex-grow">
-          <div class="bg-[#fef9c3] border border-[#fef08a] rounded-2xl py-3 px-4 shadow-sm text-center">
-            <span class="font-sans-bold text-[#1e293b] text-lg sm:text-xl font-bold whitespace-nowrap">
-              3. Moopy Bug
-            </span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Coquette Bow Sticker -->
-    <div class="w-full flex justify-end pr-8 pt-4">
-      <svg class="w-20 h-20 -rotate-12 drop-shadow-sm" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Left Loop -->
-        <path d="M45 48 C30 25, 8 30, 16 52 C22 66, 42 54, 47 50 Z" fill="#ff77aa" stroke="#c0155b" stroke-width="2.5" stroke-linejoin="round"/>
-        <!-- Right Loop -->
-        <path d="M55 48 C70 25, 92 30, 84 52 C78 66, 58 54, 53 50 Z" fill="#ff77aa" stroke="#c0155b" stroke-width="2.5" stroke-linejoin="round"/>
-        <!-- Ribbon Tails -->
-        <path d="M46 54 C35 68, 20 70, 12 72 C22 75, 42 66, 48 58" fill="#ff77aa" stroke="#c0155b" stroke-width="2.5" stroke-linejoin="round"/>
-        <path d="M52 54 C54 70, 50 86, 50 94 C54 82, 58 68, 56 56" fill="#ff77aa" stroke="#c0155b" stroke-width="2.5" stroke-linejoin="round"/>
-        <!-- Center Knot -->
-        <ellipse cx="50" cy="50" rx="6" ry="7" fill="#ff609a" stroke="#c0155b" stroke-width="2.5" />
-      </svg>
-    </div>
-
   </div>
 
   <!-- Doodlebug Auto-Resizing Protocol -->
