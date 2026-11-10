@@ -3,89 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Canvas Re-creation</title>
+  <title>Libby's Banana Corner</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Gaegu:wght@400;700&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #faf7f2;
-      background-image: radial-gradient(#dfdcd6 1.5px, transparent 1.5px);
+      background-color: #fdfbf7;
+      background-image: radial-gradient(#e5dec9 1.5px, transparent 1.5px);
       background-size: 24px 24px;
-      font-family: 'Caveat', cursive;
+      font-family: 'Gloria Hallelujah', 'Caveat', cursive, sans-serif;
+    }
+    .washi-tape {
+      background-color: #fef08a;
+      opacity: 0.9;
+      clip-path: polygon(
+        0% 4px, 4px 0px, 8px 4px, 12px 0px, calc(100% - 12px) 0px, calc(100% - 8px) 4px, calc(100% - 4px) 0px, 100% 4px,
+        100% calc(100% - 4px), calc(100% - 4px) 100%, calc(100% - 8px) calc(100% - 4px), calc(100% - 12px) 100%, 12px 100%, 8px calc(100% - 4px), 4px 100%, 0% calc(100% - 4px)
+      );
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .polaroid-shadow {
+      box-shadow: 0 10px 25px -5px rgba(180, 140, 60, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
-<body class="m-0 p-0 w-full min-h-screen overflow-x-hidden relative flex flex-col items-center select-none">
+<body class="m-0 p-0 w-full min-h-screen flex flex-col items-center select-none overflow-x-hidden text-[#5c3a21]">
 
-  <!-- SVG Doodle layer recreating hand-drawn dark lines behind the elements -->
-  <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
-    <!-- Big dark looping scribble behind photos -->
-    <path d="M 310,230 
-             C 320,320 280,420 360,460 
-             C 310,350 260,280 200,340 
-             C 120,410 40,550 110,640 
-             C 140,680 180,600 230,520
-             M 215,520 L 225,560
-             M 290,410 C 310,480 320,620 300,770" 
-          stroke="#111827" 
-          stroke-width="5" 
-          stroke-linecap="round" 
-          stroke-linejoin="round" 
-          fill="none" />
-  </svg>
-
-  <!-- Container for mobile-first canvas elements aligned to visual layout -->
-  <div class="w-full max-w-[430px] min-h-screen relative flex flex-col items-center pt-8 pb-16 px-4 z-10">
-
-    <!-- Top Badge / Note: "I like coconut" -->
-    <div class="mt-4 px-6 py-2.5 rounded-2xl bg-[#fff9d9] border border-[#f5e6a3] shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex items-center justify-center">
-      <span class="text-2xl tracking-wide font-bold text-[#e112d4] font-['Caveat']">
-        I like coconut
-      </span>
+  <main class="w-full max-w-[430px] min-h-screen px-4 py-8 flex flex-col items-center relative">
+    
+    <!-- Top Daisy Washi Tape -->
+    <div class="w-48 h-8 washi-tape flex items-center justify-around px-4 mb-6 shadow-sm border-t border-b border-amber-200/60">
+      <span class="text-xs">🌼</span>
+      <span class="text-xs">🌼</span>
+      <span class="text-xs">🌼</span>
+      <span class="text-xs">🌼</span>
     </div>
 
-    <!-- Kitty Sticker floating on the upper right -->
-    <div class="absolute right-12 top-40 rotate-[28deg] drop-shadow-sm select-none pointer-events-none">
-      <svg width="68" height="68" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Kitty Head Base -->
-        <path d="M22 45 C15 30 18 18 32 20 C42 22 48 30 52 30 C56 30 62 22 72 20 C86 18 89 30 82 45 C92 60 92 82 72 88 C58 92 46 92 32 88 C12 82 12 60 22 45 Z" fill="#ffffff" stroke="#333333" stroke-width="3" stroke-linejoin="round" />
-        <!-- Inner Ears -->
-        <path d="M26 32 C23 26 27 24 33 26 C31 31 29 33 26 32 Z" fill="#fbcfe8" />
-        <path d="M78 32 C81 26 77 24 71 26 C73 31 75 33 78 32 Z" fill="#fbcfe8" />
-        <!-- Eyes -->
-        <ellipse cx="40" cy="54" rx="3" ry="4" fill="#333333" />
-        <ellipse cx="64" cy="54" rx="3" ry="4" fill="#333333" />
-        <!-- Blush -->
-        <ellipse cx="34" cy="62" rx="4.5" ry="3" fill="#f472b6" opacity="0.85" />
-        <ellipse cx="70" cy="62" rx="4.5" ry="3" fill="#f472b6" opacity="0.85" />
-        <!-- Mouth / Nose -->
-        <path d="M50 58 C51 61 53 61 54 58" stroke="#be185d" stroke-width="2.5" stroke-linecap="round" fill="none" />
+    <!-- Header Banner -->
+    <div class="relative w-full flex items-center justify-center my-2">
+      <!-- Underline highlighter bar -->
+      <div class="absolute w-[92%] h-7 bg-[#fef08a]/70 rounded-full -z-0"></div>
+      <!-- Pill Container -->
+      <div class="relative z-10 px-6 py-2 rounded-full border border-amber-300 bg-[#fffbeb]/90 shadow-sm flex items-center justify-center">
+        <h1 class="text-xl md:text-2xl font-bold tracking-wide text-[#422006] flex items-center gap-1.5 whitespace-nowrap">
+          <span>🍌</span>
+          <span>LIBBY'S BANANA CORNER</span>
+          <span>🍌</span>
+        </h1>
+      </div>
+    </div>
+
+    <!-- Subtitle Pill -->
+    <div class="w-full flex justify-center mt-3 mb-6">
+      <div class="px-5 py-1.5 rounded-full border border-amber-300/80 bg-[#fffbeb]/95 shadow-sm">
+        <p class="text-sm md:text-base font-semibold text-[#451a03]">
+          You are absolutely BANANAS (the good kind) 💛
+        </p>
+      </div>
+    </div>
+
+    <!-- Center Interactive Area: Polaroid & Whimsical Doodles -->
+    <div class="relative w-full max-w-[320px] aspect-[4/5] flex items-center justify-center my-2">
+      
+      <!-- Hand-drawn Banana Doodle curving behind Polaroid -->
+      <svg class="absolute -inset-4 w-[125%] h-[125%] pointer-events-none -z-0" viewBox="0 0 360 400" fill="none">
+        <!-- Banana Stem & Curve -->
+        <path d="M 55 135 C 50 170, 70 230, 150 250 C 220 265, 270 205, 280 180" 
+              stroke="#eab308" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M 52 140 C 48 135, 58 130, 68 136" 
+              stroke="#713f12" stroke-width="6" stroke-linecap="round" />
+        <!-- Little green dot near top stem -->
+        <circle cx="48" cy="128" r="4" fill="#65a30d" />
       </svg>
+
+      <!-- Yellow Sparkle (Left) -->
+      <div class="absolute -left-2 top-10 pointer-events-none z-20">
+        <svg class="w-11 h-11 text-amber-400 fill-amber-300 drop-shadow" viewBox="0 0 24 24">
+          <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" stroke="#ca8a04" stroke-width="1.5"/>
+        </svg>
+      </div>
+
+      <!-- Pink Mini Sparkle (Left inner) -->
+      <div class="absolute left-6 top-20 pointer-events-none z-20">
+        <svg class="w-6 h-6 text-pink-400 fill-pink-200" viewBox="0 0 24 24">
+          <path d="M12 2L13.8 10.2L22 12L13.8 13.8L12 22L10.2 13.8L2 12L10.2 10.2L12 2Z" stroke="#db2777" stroke-width="1.8"/>
+        </svg>
+      </div>
+
+      <!-- Cute Star Sticker (Right) -->
+      <div class="absolute -right-3 top-16 pointer-events-none z-20 rotate-12">
+        <div class="relative w-14 h-14 flex items-center justify-center">
+          <svg class="w-14 h-14 text-amber-300 fill-amber-200 drop-shadow-md" viewBox="0 0 24 24">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" 
+                  stroke="#d97706" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+          <!-- Kawaii cute face on star -->
+          <div class="absolute inset-0 flex flex-col items-center justify-center pt-1">
+            <div class="flex gap-2">
+              <span class="w-1 h-1 rounded-full bg-[#78350f]"></span>
+              <span class="w-1 h-1 rounded-full bg-[#78350f]"></span>
+            </div>
+            <span class="w-1.5 h-1 border-b-2 border-[#78350f] rounded-full mt-0.5"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Polaroid Photo Frame (STATIONARY) -->
+      <div class="relative z-10 bg-white p-3.5 pb-8 rounded-sm polaroid-shadow border border-amber-100 flex flex-col items-center">
+        <div class="w-52 h-52 overflow-hidden bg-neutral-900 flex items-center justify-center rounded-[1px]">
+          <img 
+            src="https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif" 
+            alt="Banana Minions" 
+            class="w-full h-full object-cover pointer-events-none"
+          />
+        </div>
+      </div>
+
     </div>
 
-    <!-- Photo 1: Upper Polaroid Card (South Park guy) -->
-    <div class="mt-40 bg-white p-2.5 pb-6 shadow-[0_4px_16px_rgba(0,0,0,0.12)] border border-[#edebe8] z-10 w-52 flex flex-col items-center">
-      <img 
-        src="https://media.giphy.com/media/eti1qm33pRbaw/giphy.gif" 
-        alt="Animated content" 
-        class="w-full h-auto aspect-square object-cover block"
-        loading="lazy"
-      />
+    <!-- Status Pill with Heart Balloon/Sticker -->
+    <div class="relative w-full flex flex-col items-center mt-4">
+      
+      <!-- Highlighter stripe behind status -->
+      <div class="absolute top-10 w-[95%] h-5 bg-[#fef08a]/60 rounded-full -z-0"></div>
+
+      <!-- Potassium Queen Pill -->
+      <div class="relative z-10 px-6 py-2 rounded-full border border-amber-300 bg-[#fffbeb] shadow-sm flex items-center gap-1">
+        <span class="text-amber-500">✨</span>
+        <span class="text-base font-bold text-[#451a03]">Potassium Queen Status: 100%</span>
+      </div>
+
+      <!-- Puffy Pink Heart with Doodled String -->
+      <div class="absolute right-9 top-0 pointer-events-none z-20 flex flex-col items-center">
+        <!-- Pink Puffy Heart SVG -->
+        <div class="w-12 h-12 relative flex items-center justify-center drop-shadow-md">
+          <svg class="w-12 h-12 fill-[#f472b6]" viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  stroke="#be185d" stroke-width="1.2"/>
+          </svg>
+          <!-- Gloss highlight -->
+          <div class="absolute top-2 right-2.5 w-3 h-2 bg-white/50 rounded-full rotate-45"></div>
+        </div>
+        <!-- Curving string doodle -->
+        <svg class="w-10 h-14 -mt-1" viewBox="0 0 40 60" fill="none">
+          <path d="M 20 0 C 22 15, 36 25, 34 38 C 32 48, 22 52, 24 60" 
+                stroke="#ca8a04" stroke-width="4.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+
     </div>
 
-    <!-- Photo 2: Lower Polaroid Card (Toilet Drawing) overlapping below -->
-    <div class="-mt-9 bg-white p-3 pb-8 shadow-[0_6px_20px_rgba(0,0,0,0.14)] border border-[#edebe8] z-20 w-[240px] flex flex-col items-center">
-      <img 
-        src="https://islacowper.co.uk/img/photo_1794274450250_4l8651.png" 
-        alt="Drawing content" 
-        class="w-full h-auto object-contain block bg-white"
-        loading="lazy"
-      />
+    <!-- Banana Fact Pill -->
+    <div class="w-full flex justify-center mt-5 mb-14 z-10">
+      <div class="px-5 py-2 rounded-full border border-amber-300 bg-[#fffbeb] shadow-sm flex items-center gap-1.5 text-center">
+        <p class="text-xs sm:text-sm font-semibold text-[#451a03] leading-snug">
+          Banana fact #1: Libby is 10/10 sweet & ape-pealing 🐒✨
+        </p>
+      </div>
     </div>
 
-  </div>
+    <!-- Bottom Daisy Washi Tape -->
+    <div class="w-48 h-8 washi-tape flex items-center justify-around px-4 mt-auto mb-4 shadow-sm border-t border-b border-amber-200/60">
+      <span class="text-xs">🌼</span>
+      <span class="text-xs">🌼</span>
+      <span class="text-xs">🌼</span>
+      <span class="text-xs">🌼</span>
+    </div>
+
+  </main>
 
 
   <!-- Doodlebug Auto-Resizing Protocol -->
