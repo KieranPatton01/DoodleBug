@@ -3,29 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Canvas</title>
+  <title>Canvas Re-creation</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    .dot-grid {
-      background-color: #faf9f5;
-      background-image: radial-gradient(#dedbd2 1.2px, transparent 1.2px);
+    body {
+      background-color: #faf7f2;
+      background-image: radial-gradient(#dfdcd6 1.5px, transparent 1.5px);
       background-size: 24px 24px;
+      font-family: 'Caveat', cursive;
     }
   </style>
 </head>
-<body class="m-0 p-0 w-full min-h-screen dot-grid flex flex-col items-center justify-center">
-  <div class="flex flex-col items-center justify-center w-full px-4" style="margin-top: -15vh;">
-    <!-- Polaroid Frame Container -->
-    <div class="bg-white p-2.5 pb-6 shadow-[0_4px_16px_rgba(0,0,0,0.08)] border border-neutral-100 flex flex-col items-center max-w-[260px] w-full">
-      <div class="w-full aspect-square overflow-hidden bg-neutral-100">
-        <img 
-          src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" 
-          alt="Cat GIF" 
-          class="w-full h-full object-cover block select-none pointer-events-none"
-        />
-      </div>
+<body class="m-0 p-0 w-full min-h-screen overflow-x-hidden relative flex flex-col items-center select-none">
+
+  <!-- SVG Doodle layer recreating hand-drawn dark lines behind the elements -->
+  <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
+    <!-- Big dark looping scribble behind photos -->
+    <path d="M 310,230 
+             C 320,320 280,420 360,460 
+             C 310,350 260,280 200,340 
+             C 120,410 40,550 110,640 
+             C 140,680 180,600 230,520
+             M 215,520 L 225,560
+             M 290,410 C 310,480 320,620 300,770" 
+          stroke="#111827" 
+          stroke-width="5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          fill="none" />
+  </svg>
+
+  <!-- Container for mobile-first canvas elements aligned to visual layout -->
+  <div class="w-full max-w-[430px] min-h-screen relative flex flex-col items-center pt-8 pb-16 px-4 z-10">
+
+    <!-- Top Badge / Note: "I like coconut" -->
+    <div class="mt-4 px-6 py-2.5 rounded-2xl bg-[#fff9d9] border border-[#f5e6a3] shadow-[0_1px_3px_rgba(0,0,0,0.06)] flex items-center justify-center">
+      <span class="text-2xl tracking-wide font-bold text-[#e112d4] font-['Caveat']">
+        I like coconut
+      </span>
     </div>
+
+    <!-- Kitty Sticker floating on the upper right -->
+    <div class="absolute right-12 top-40 rotate-[28deg] drop-shadow-sm select-none pointer-events-none">
+      <svg width="68" height="68" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Kitty Head Base -->
+        <path d="M22 45 C15 30 18 18 32 20 C42 22 48 30 52 30 C56 30 62 22 72 20 C86 18 89 30 82 45 C92 60 92 82 72 88 C58 92 46 92 32 88 C12 82 12 60 22 45 Z" fill="#ffffff" stroke="#333333" stroke-width="3" stroke-linejoin="round" />
+        <!-- Inner Ears -->
+        <path d="M26 32 C23 26 27 24 33 26 C31 31 29 33 26 32 Z" fill="#fbcfe8" />
+        <path d="M78 32 C81 26 77 24 71 26 C73 31 75 33 78 32 Z" fill="#fbcfe8" />
+        <!-- Eyes -->
+        <ellipse cx="40" cy="54" rx="3" ry="4" fill="#333333" />
+        <ellipse cx="64" cy="54" rx="3" ry="4" fill="#333333" />
+        <!-- Blush -->
+        <ellipse cx="34" cy="62" rx="4.5" ry="3" fill="#f472b6" opacity="0.85" />
+        <ellipse cx="70" cy="62" rx="4.5" ry="3" fill="#f472b6" opacity="0.85" />
+        <!-- Mouth / Nose -->
+        <path d="M50 58 C51 61 53 61 54 58" stroke="#be185d" stroke-width="2.5" stroke-linecap="round" fill="none" />
+      </svg>
+    </div>
+
+    <!-- Photo 1: Upper Polaroid Card (South Park guy) -->
+    <div class="mt-40 bg-white p-2.5 pb-6 shadow-[0_4px_16px_rgba(0,0,0,0.12)] border border-[#edebe8] z-10 w-52 flex flex-col items-center">
+      <img 
+        src="https://media.giphy.com/media/eti1qm33pRbaw/giphy.gif" 
+        alt="Animated content" 
+        class="w-full h-auto aspect-square object-cover block"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Photo 2: Lower Polaroid Card (Toilet Drawing) overlapping below -->
+    <div class="-mt-9 bg-white p-3 pb-8 shadow-[0_6px_20px_rgba(0,0,0,0.14)] border border-[#edebe8] z-20 w-[240px] flex flex-col items-center">
+      <img 
+        src="https://islacowper.co.uk/img/photo_1794274450250_4l8651.png" 
+        alt="Drawing content" 
+        class="w-full h-auto object-contain block bg-white"
+        loading="lazy"
+      />
+    </div>
+
   </div>
+
 
   <!-- Doodlebug Auto-Resizing Protocol -->
   <script>
